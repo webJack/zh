@@ -1,0 +1,314 @@
+{include file="common/header"}
+<link href="__STATIC_PATH__/index/category/css/category.css" rel="stylesheet">
+<div class="category">
+	<div class="topic-menu-wrap">
+		<div class="topic-menu">
+
+			{if !input('more')}
+			<!-- pc -->
+				<div class="crumb">
+				
+					{if $cur_category_info['level'] == "1" }
+					<h2>
+						<a href="{:url('index',['cate_id'=>'','city_id'=>$cur_city_info['city_id']])}">职场发展</a>
+						<i class="icon icon-go"></i>
+					</h2>
+					<!-- 时间：2017年9月20日19:57:28 -->
+					<ul class="topic-main-menu topicMainMenu">
+					 {foreach $cate_list as $value}
+ 					 <!-- <?php if (isset($value['child_menu'])){ ?> -->
+                     {foreach $value['child_menu'] as $value2nd}		
+						<li class="fuckoff">
+							<a href="{:url('index',['cate_id'=>$value2nd['cate_id'],'city_id'=>$cur_city_info['city_id']])}">{$value2nd['cate_name']}</a>
+							<div class="topic-drop-wrap topicDropWrap" style="top: 58px;">
+							<!-- <?php if (isset($value2nd['child_menu'])){ ?> -->
+								<ul class="topic-sub-menu">
+								 {foreach $value2nd['child_menu'] as $value3th}
+									<li>
+										<a href="{:url('index',['cate_id'=>$value3th['cate_id'],'city_id'=>$cur_city_info['city_id']])}" class="inner">{$value3th['cate_name']}</a>
+									</li>
+									{/foreach}
+								</ul>
+								<!-- <?php } ?> -->
+							</div>
+						</li>
+				     {/foreach}
+	                 <!-- <?php } ?> -->	
+	                 {/foreach}				
+					</ul>
+						{elseif $cur_category_info['level'] == '2'}
+							<h2>
+								<a href="{:url('index',['cate_id'=>'','city_id'=>$cur_city_info['city_id']])}">{$cur_parent_cate['cate_name']}</a>
+								<i class="icon icon-go"></i>
+								<!-- {:url('index',['cate_id'=>''])} -->
+								<a href="">{$cur_category_info['cate_name']}</a>
+								<i class="icon icon-go"></i>	
+							</h2>
+							<!-- 时间：2017年9月20日19:57:28 -->
+							<ul class="topic-main-menu topicMainMenu">
+								{foreach $cur_child_cate as $value}
+									<li>
+					                    <a href="{:url('index',['cate_id'=>$value['cate_id'],'city_id'=>$cur_city_info['city_id']])}">{$value['cate_name']}</a>
+					                </li>
+								{/foreach}
+							</ul>							
+						{elseif $cur_category_info['level'] == '3'}
+							<h2>
+								<a href="{:url('index',['cate_id'=>'','city_id'=>$cur_city_info['city_id']])}">{$cur_gran_cate['cate_name']}</a>
+								<i class="icon icon-go"></i>
+								<a href="{:url('index',['cate_id'=>$cur_parent_cate['cate_id'],'city_id'=>$cur_city_info['city_id']])}">{$cur_parent_cate['cate_name']}</a>
+								<i class="icon icon-go"></i>		
+								<a href="{:url('index',['cate_id'=>$cur_category_info['cate_id'],'city_id'=>$cur_city_info['city_id']])}">{$cur_category_info['cate_name']}</a>
+								<i class="icon icon-go"></i>	
+							</h2>
+					{/if}
+				</div>
+			{/if}
+				<!-- mobile -->
+				<div class="mobile-crumb mobileCrumb">
+					<h2>	
+						<!-- 时间：2017年9月20日16:05:17 -->
+						<a href="#">职场发展
+							<i class="icon icon-arrow-bottom"></i>
+						</a>
+					</h2>
+					<div class="topic-drop-wrap topicDropWrap topicDropWrap">	
+						<ul class="topic-sub-menu">
+							<li>
+								<a href="#" class="inner">求职</a>
+							</li>
+							<li>
+								<a href="#" class="inner">职场晋升</a>
+							</li>		
+							<li>
+								<a href="#" class="inner">职场转型</a>
+							</li>
+							<li>
+								<a href="#" class="inner">职业规划</a>
+							</li>
+							<li>
+								<a href="#" class="inner">职场技能</a>
+							</li>							
+							<li>
+								<a href="#" class="inner">经营管理</a>
+							</li>
+							<li>
+								<a href="#" class="inner">项目管理</a>
+							</li>
+							<!-- 时间：2017年9月20日19:23:01 -->
+							<li>
+								<a href="#" class="inner">全国通话</a>
+							</li>							
+						</ul>
+					</div>
+				</div>
+				
+				<!-- dulishuaixuan -->
+				<div class="price-screen priceScreen">
+					<a class="price-screen-btn priceScreenBtn" >
+						筛选
+						<i class="icon"></i>
+					</a>
+					<div class="topic-drop-wrap topicDropWrap">
+						<div class="topic-sub-menu">
+							<h2>价格</h2>
+							<ul>
+								<li>
+	                                <a href="{:url('index',['min'=>0,'max'=>300,'city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement])}" class="inner {$active_class[0]}" >0-300</a>
+	                            </li>							
+	                            <li>
+	                                <a href="{:url('index',['min'=>301,'max'=>600,'city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement])}" class="inner {$active_class[1]}" >301-600</a>
+	                            </li>
+	                            <li>
+	                                <a href="{:url('index',['min'=>601,'max'=>1000,'city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement])}" class="inner {$active_class[2]}" >601-1000</a>
+	                            </li>
+	                            <li>
+	                                <a href="{:url('index',['min'=>1001,'city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement])}" class="inner {$active_class[3]}" >1000以上</a>
+	                            </li>
+                            </ul>
+                            <div class="price-section-form priceSectionForm">	
+                            	<form action="{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement])}" >
+
+			                        <input class="lowPrice" placeholder="起始价格" name="low-price" value="{$low_price !='' ?$low_price:''}">
+			                        一
+			                        <input class="highPrice" type="text" placeholder="终止价格" name="high-price" value="{$high_price != ''?$high_price:''}">
+			                        <span class="priceSectionBtn price-btn">	<input style="border: none;cursor: pointer;" type="submit" value="确定">
+			                        </span>
+		                        </form>
+                    		</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="total">
+			<!-- pc -->
+			<ul class="sort-list">
+				<li class="{$picked_class[0]}">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'all','min'=>$min,'max'=>$max])}">综合排序</a>
+				</li>
+				<li class="{$picked_class[1]}">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'total_meet','min'=>$min,'max'=>$max])}">见过最多</a>
+				</li>					
+				<li class="{$picked_class[2]}">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'avg_score','min'=>$min,'max'=>$max])}">评分最高</a>
+				</li>					
+				<li class="{$picked_class[3]}">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'create_time','min'=>$min,'max'=>$max])}">发布时间</a>
+				</li>		
+				{if $requirement!='price_asc' && $requirement!='price_desc'}			
+				<li class="{$picked_class[4]}">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'price_asc','min'=>$min,'max'=>$max])}">价格</a>
+				</li>
+				{elseif $requirement=='price_asc'}
+				<li class="{$picked_class[4]} price-asc">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'price_desc','min'=>$min,'max'=>$max])}">价格<span class="icon"></span></a>
+				</li>					
+				{elseif $requirement=='price_desc'}
+				<li class="{$picked_class[4]} price-desc">
+					<a href="
+					{:url('index',['city_id'=>$cur_city_info['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>'price_asc','min'=>$min,'max'=>$max])}">价格<span class="icon"></span></a>
+				</li>					
+				{/if}									
+			</ul>	
+
+			<!-- mobile start -->
+			<ul class="mobile-sort-list">
+				<li class="drop-select dropSortWrap">
+					<a class="drop-select-default dropSortDefault" href="javascript:void 0;" >综合排序
+						<span class="icon drop-select-icon"></span>
+					</a>
+					<ul class="drop-select-options">
+						<li>
+							<a href="#">见过最多</a>
+						</li>
+						<li>
+							<a href="#">评分最高</a>
+						</li>							
+						<li>
+							<a href="#">发布时间</a>
+						</li>							
+					</ul>
+				</li>
+				<li class="price-sort "> 
+					<a href="#">价格
+						<span class="icon"></span>
+					</a>
+				</li>
+			</ul>
+			<!-- mobile end -->
+			
+			<div class="drop-select dropCityWrap">
+				<a class="drop-select-default dropCityDefault" href="javascript:void 0;" >{$cur_city_info['city_name']}<span class="icon drop-select-icon"></span>
+				</a>
+				<ul class="drop-select-options">
+					<!-- class="current" js点击加类名 -->
+					{foreach $city_list as $value}
+					{if $cur_city_info['city_id'] == $value['city_id']}
+					<li class="current">
+						<a href="{:url('index',['city_id'=>$value['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement])}" class="inner">
+							<i class="current-sign"></i>
+							{$value['city_name']}
+						</a>
+					</li>
+						{else}	
+					<li>
+						<a href="{:url('index',['city_id'=>$value['city_id'],'cate_id'=>$cur_category_info['cate_id'],'requirement'=>$requirement,'min'=>$min,'max'=>$max])}" class="inner">
+							<i class="current-sign"></i>
+							{$value['city_name']}
+						</a>
+					</li>										
+					{/if}						
+					{/foreach}			
+				</ul>
+			</div>
+		</div>
+
+		<!-- topic_list -->
+		<ul class="topic-list topics">
+		{foreach $get_page_list_inner as $value}
+		
+			<li class="a-topic">
+				<!-- start -->
+				<a href="{:url('tutor/index',['tutor_id'=>$value['tutor_id']])}" class="topic-tutor-link">
+            		<span class="topic-tutor-pic" style="background-image : url(__STATIC_PATH__/{$value['tutor_img']})">
+            		</span>
+            		<div class="topic-info">
+                    	<h3 class="topic-title">
+                        
+                        	<!-- <div class="topic-tag">线上课</div> -->
+                        
+	                        <span class="topic-title-txt">{$value['topic_title']}</span>
+	                        <div class="topic-title-info">
+	                            
+	                            
+	                            <div class="rating withRatingTip tooltipstered">
+	                                {$value['avg_score']}<span class="unit">分</span>
+	                                <span class="icon icon-tip"></span>
+	                            </div>
+	                            
+	                            
+	                            <div class="price">
+	                                <em>{$value['price']}</em>元/次
+	                            </div>
+	                        </div>
+                    	</h3>
+	                    <div class="topic-tutor-info">
+	                        <span class="topic-tutor-name">{$value['tutor_name']}</span>
+	                        <span class="topic-tutor-intro">
+	                             {$value['tutor_identity']}
+	                        </span>
+	                    </div>
+	                    <p class="topic-tutor-count">
+	                        <span>{$value['total_meet']}</span>人见过
+	                    </p>
+            		</div>
+        		</a>
+				<!-- end -->
+			</li>
+			{/foreach}
+		</ul>
+
+		<!-- 分页 -->
+		<ul class="pager">
+		{if $get_page_list['cur_page'] != 0}
+			<li>
+				<a href="{:url('index',['cur_page'=>$get_page_list['cur_page']-1])}">
+
+					<span class="icon icon-prev"></span>
+				</a>				
+			</li>
+		{/if}
+			{foreach $get_page_list['page_list'] as $keys=>$value}
+			{if $get_page_list['cur_page'] == $keys}
+			<li class="current">
+				<a href="{:url('index',['cur_page'=>$keys])}">{$keys+1}</a>
+			</li>
+			{else}
+			<li>
+				<a href="{:url('index',['cur_page'=>$keys])}">{$keys+1}</a>
+			</li>				
+			{/if}
+			{/foreach}	
+			{if $get_page_list['cur_page'] != $get_page_list['tol_page']}	
+			<li>
+				<a href="{:url('index',['cur_page'=>$get_page_list['cur_page']+1])}">
+					<span class="icon icon-next"></span>
+				</a>
+			</li>
+			{/if}
+		</ul>
+	</div>	
+</div>
+
+<script src="__STATIC_PATH__/index/category/js/category.js"></script>
+{include file="common/footer"}
+
+<!-- {foreach $content_list as $value} -->

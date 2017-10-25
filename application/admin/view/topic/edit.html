@@ -1,0 +1,55 @@
+{include file="public/header"} 
+
+ 
+ <div class="self-container mt-3">
+    <h3>话题编辑页面</h3>
+     <form action="{:url('update')}" method="post">
+        <div class="form-group">
+            <label >话题</label>
+            <input type="text" class="form-control" name="topic_title" value="{$topic_info['topic_title']}">
+        </div>
+        <div class="form-group">
+            <label >分类</label>
+            <select name="cate_id" id="" class="form-control">
+                <option value="">请选择</option>
+                {foreach $cate_list as $value}
+                    <option disabled value="{$value['cate_id']}">{$value['cate_name']}</option>
+                    <!-- <?php if (isset($value['child_menu'])){ ?> -->
+                    {foreach $value['child_menu'] as $value2nd}
+                        <option disabled value="{$value2nd['cate_id']}">&nbsp;&nbsp;&nbsp;{$value2nd['cate_name']}</option>
+                        <!-- <?php if (isset($value2nd['child_menu'])){ ?> -->
+                        {foreach $value2nd['child_menu'] as $value3th}
+                        <option value="{$value3th['cate_id']}" {if $value3th['cate_id']==$topic_info['cate_id']} selected {/if}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$value3th['cate_name']}</option>
+                        {/foreach}
+                        <!-- <?php } ?> -->
+                    {/foreach}
+                    <!-- <?php } ?> -->
+                {/foreach}
+            </select>
+        </div>
+        <div class="form-group">
+            <label >价格</label>
+            <input type="text" class="form-control" name="price" value="{$topic_info['price']}">
+        </div>
+        <div class="form-group">
+            <label >时长</label>
+            <input type="text" class="form-control" name="duration" value="{$topic_info['duration']}">
+        </div>
+        <div class="form-group">
+            <label >内容</label>
+            <textarea id="text_content" name="topic_content">{$topic_info['topic_content']}</textarea>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="topic_id" value="{$topic_info.topic_id}">
+            <input type="submit" class="btn btn-info" value="保存">
+        </div>
+     </form>
+</div>
+<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.all.min.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('text_content');
+</script>
+
+{include file="public/footer"}

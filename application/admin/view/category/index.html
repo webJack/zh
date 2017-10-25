@@ -1,0 +1,48 @@
+{include file="public/header"} 
+
+<div class="mt-3">
+    <a href="{:url('add')}" class="btn btn-info">添加分类</a>
+    <form class="form-inline" style="margin:20px 0;" action="">
+      <div class="form-group">
+        <label>分类级别</label>
+        <select name="level" class="form-control">
+            <option value="">请选择</option>
+            <option value="1" {if $level==1} selected {/if}>一级分类</option>
+            <option value="2" {if $level==2} selected {/if}>二级分类</option>
+            <option value="3" {if $level==3} selected {/if}>三级分类</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">搜索</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>分类名</th>
+            <th>级别</th>
+            <th>操作</th>
+        </tr>
+        {foreach $cate_list as $value}
+        <tr>
+            <td>{$value['cate_id']}</td>
+            <td title="{$value['cate_name']}">{$value['cate_name']}</td>
+            <td>
+                <!-- {if $value['level'] == 1} -->
+                一级分类
+                <!-- {elseif $value['level'] == 2} -->
+                二级分类
+                <!-- {else} -->
+                三级分类 
+                <!-- {/if} -->
+            </td>
+            <td>
+                <a href="{:url('delete',['cate_id'=>$value['cate_id']])}" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+    <div>
+     {$cate_list->render()}
+    </div>
+</div>
+
+{include file="public/footer"}

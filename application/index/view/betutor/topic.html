@@ -1,0 +1,115 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/betutor/css/index.css">
+<div class="zhima_test">
+	<div class="self-container">
+		<!-- 芝麻认证导航 -->
+		<div class="sticky_wrapper">
+			<div class="zhima_expert_nav">
+				<ul class="zhima_expert">			
+					<li class="active">
+						<span>1</span>
+						实名认证
+					</li>
+					<li class="active">
+						<span>2</span>
+						填写行家资料
+					</li>
+					<li class="active">
+						<span>3</span>
+						添加话题
+					</li>
+				</ul>
+				<p class="step_tip">填写行家资料大约需要20-30分钟</p>
+				<p class="step_tip">恭喜，只差最后一步啦，添加话题大约需要5-10分钟时间，请保持耐心哦</p>
+			</div>
+		</div>
+		<!-- 实名认证 -->
+        <!-- 填写资料 -->
+        <!-- 添加话题 -->
+        <div class="zhima_content zhima-topic">
+        	<form class="tutor_form">
+        		<div class="form-group">
+			    	<i class="zhima_hint">*</i>
+			    	<input name="topic" type="text" maxlength="20" placeholder="话题名称：提炼话题的核心要点，方便学员筛选，最少5字" class="zhima-topic-test" value="{$tutor_topic['topic']}">
+			    	<span class="form_error"></span>
+			    </div>
+			    <div class="form-group tutor_city">
+			    	<i class="zhima_hint">*</i>
+			    	<select class="zhima_city zhima-topic-test" name="duration" style="padding-left: 10px;">
+			    		<option value="">请选择：大致时间</option>
+			    			<option value="0.5" {if $tutor_topic['duration']=='0.5'} selected {/if}>0.5小时</option>
+							<option value="1" {if $tutor_topic['duration']=='1'} selected {/if}>1小时</option>
+							<option value="1.5" {if $tutor_topic['duration']=='1.5'} selected {/if}>1.5小时</option>
+							<option value="2" {if $tutor_topic['duration']=='2'} selected {/if}>2小时</option>
+							<option value="2.5" {if $tutor_topic['duration']=='2.5'} selected {/if}>2.5小时</option>
+							<option value="3" {if $tutor_topic['duration']=='3'} selected {/if}>3小时</option>
+			    	</select>
+			    	<span class="form_error"></span>
+			    </div>
+			    <div class="form-group tutor_city">
+			    	<i class="zhima_hint">*</i>
+			    	<select class="zhima_city zhima-topic-test" name="cate_id" style="padding-left: 10px;">
+			    		<option value="">请选择：话题分类</option>
+						{foreach $cate_list as $value}
+		                    <option value="{$value['cate_id']}" disabled>{$value['cate_name']}</option>
+		                    <!-- <?php if (isset($value['child_menu'])){ ?> -->
+		                    {foreach $value['child_menu'] as $value2nd}
+		                        <option value="{$value2nd['cate_id']}" {if $value2nd['cate_id']==$tutor_topic['cate_id']} selected {/if}>&nbsp;&nbsp;&nbsp;{$value2nd['cate_name']}</option>
+		                        <!-- <?php if (isset($value2nd['child_menu'])){ ?> -->
+		                        {foreach $value2nd['child_menu'] as $value3th}
+		                        <option value="{$value3th['cate_id']}" {if $value3th['cate_id']==$tutor_topic['cate_id']} selected {/if}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$value3th['cate_name']}</option>
+		                        {/foreach}
+		                        <!-- <?php } ?> -->
+		                    {/foreach}
+		                    <!-- <?php } ?> -->
+		                {/foreach}
+			    	</select>
+			    	<span class="form_error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<i class="zhima_hint">*</i>
+			    	<input name="price" type="text" maxlength="20" placeholder="话题价格" class="zhima-topic-test" value="{$tutor_topic['price']}">
+			    	<span class="tutor_form_tip">价格不代表行家资历及水平，而是学员用来向知识分享者表达感谢的金额。在行的行家均价约为300元，建议您将价格设定在200-400元区间，更容易被学员约见。</span>
+			    	<span class="form_error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<label class="tutor_test"><span class="zhima_hint">*</span>话题大纲/要点（最多800字）<span>【示例】</span> </label>
+			    	<textarea rows="6" name="topic_introduction" maxlength="500" placeholder="不少于5条要点，同一主题（1）教你科学的练习方法，多种训练方法结合练习腹肌（2）短期见效，让你越练越High（3）为你量身定制饮食计划最少20字" class="zhima-topic-test">{$tutor_topic['topic_introduction']}</textarea>
+			    	<span class="form_error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<label class="tutor_test"><span class="zhima_hint">*</span>您在该领域的资历和成就（最多800字）<span>【示例】</span> </label>
+			    	<textarea rows="6" name="topic_achievement" maxlength="500" placeholder="不少于5条要点，同一主题（1）教你科学的练习方法，多种训练方法结合练习腹肌（2）短期见效，让你越练越High（3）为你量身定制饮食计划最少20字" class="zhima-topic-test">{$tutor_topic['topic_achievement']}</textarea>
+			    	<span class="form_error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<label class="tutor_test">补充更多想说的（最多1000字）</label>
+			    	<textarea rows="6" name="summary" maxlength="500" placeholder="包括但不限于：你想与学员分享的心情、学员约见前需做哪些准备、话题涉及的方法论模型和工具">{$tutor_topic['summary']}</textarea>
+			    </div>
+			    <div class="tutor_checkbox form-group">
+			        <label>
+			            <input id="is_agreed" type="checkbox" checked="">
+			           <!--  <span class="checkbox checkbox-true"><i class="icon icon-checkbox"></i></span> -->接受前两单半价，获得更多推广机会
+			        </label>
+			        <span class="tutor_form_tip">确认接受2名学员的约见后，价格将自动恢复到原价。据统计：95.2%的新行家通过破冰价获得首批种子学员，获得了首批好评。</span>
+			    </div>
+			    <div class="form-group tutor_btnbox">
+			    	<a href="{:url('betutor/material')}" class="tutor_backbtn">
+			    		<返回
+			    	</a>
+			    	<button class="tutor_savebtn zhima-topic-btn" type="button">保存暂不提交</button>
+			    	<button class="tutor_submitbtn zhima-topic-submit" type="button">提交认证</button>
+			    </div>
+        	</form>
+        </div>
+	</div>
+</div>
+<script>
+	var saveTopic_ajax_url = "{:url('betutor/saveTopic')}";
+	var submit_ajax_url = "{:url('betutor/submit')}";
+	var to_url = "{:url('betutor/topic')}";
+	var wait_url = "{:url('betutor/wait')}";
+</script>
+<script src="__STATIC_PATH__/index/betutor/js/index.js"></script>
+{include file="common/footer"}

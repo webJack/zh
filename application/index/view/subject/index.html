@@ -1,0 +1,64 @@
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/subject/css/index.css">
+
+  <div id="subject-top" class="subject-top">
+    <div class="self-container">
+        <div class="top-content text-center">
+          <div class="content-banner col-sm-hide">
+            <img src="__STATIC_PATH__/{$adv_bigimg}"  alt="">
+          </div>
+          <div class="content-coupon text-center">
+            <div class="coupon-title">
+              <p class="title-price">
+                <span class="price-left">
+                  满<i>199</i><br>减</span>
+                </span>
+                <span class="price-right">
+                  50
+                </span>
+              </p>
+              <p>领取后21日内有效</p>
+            </div>
+            <ul class="coupon-rule">
+              <li> · 仅限本专题使用</li>
+              <li> · 满199元可用</li>
+            </ul>
+            <div class="coupon-btn">
+              <a href="#">领取 > </a>
+            </div>
+            <div class="coupon-tag">
+              <p>限量<br>500张</p>
+            </div>
+          </div>
+        </div>
+        <p class="top-title">2017年国庆节八天长假即将到来，资深旅行定制专家一对一为您打造独一无二的旅行计划！</p>
+    </div>
+  </div>
+  <div id="subject-share" class="subject-share">
+    <div class="self-container">
+      <span>分享</span>
+      <a href="#" class="share-weibo icon"></a>
+      <a href="#" class="share-weixin icon"></a>
+    </div>
+  </div>
+  <div class="subject-content self-container" class="subject-content">
+    <ul class="content-items">
+    {foreach $subject_list as $value}
+      <li>
+        <a href="#">
+          <div class="items-tutor">
+            <img src="__STATIC_PATH__/{$value['tutor_img']}" alt="">
+            <h3>{$value.tutor_name}</h3>
+            <p>{$value.tutor_identity}</p>
+          </div>
+          <div class="items-topic">
+            <h4>{$value.topic_title}</h4>
+            <p>{$value.topic_title}</p>
+          </div>
+          <span class="items-views">{$value['total_wish']}人想见</span>
+        </a>
+      </li>
+    {/foreach}
+    </ul>
+  </div>
+{include file="common/footer"}

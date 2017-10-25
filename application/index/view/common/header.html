@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>header</title>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+  <script src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/header/css/header.css">
+
+  <style type="text/css">
+        @font-face{
+          font-family: tutor-icons;
+          src:url(__STATIC_PATH__/index/header/css/ddfa3f61.tutor-icons.woff);
+        }
+        button,span,i{
+          font-family: tutor-icons;
+          font-style: normal;
+          line-height: 1;
+        }
+        .icon-zaih:before{
+          content: "\e902";
+        }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <nav class="navbar navbar-fixed-top header-navbar" role="navigation">
+      <div class="header-nav">
+        <div class="navbar-header">
+          <a class="navbar-brand header-logo" href="{:url('index/index')}"><i class="icon icon-zaih"></i></a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+          <ul class="nav navbar-nav header-title">
+            <li><a href="{:url('category/index')}">职场发展</a></li>
+            <li><a href="#">行业经验</a></li>
+            <li><a href="#">互联网+</a></li>
+            <li><a href="#">创业与投融资</a></li>
+            <li class="dropdown header-more1" >
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                更多 
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu header-more">
+                <li><a href="#">生活服务</a></li>
+                <li><a href="#">心理</a></li>
+                <li><a href="#">投资理财</a></li>
+                <li><a href="#">教育学习</a></li>
+                <li><a href="#">其他</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <form class="navbar-form navbar-right" action="{:url('search/index')}" role="search" id="header-search">
+            <input type="text" class="form-control" placeholder="搜行家、话题、服务" name="word" value="{$keywords?$keywords:''}">
+            <input type="hidden" name="city_id" value="1">
+            <button type="submit" class="search-btn icon icon-search"></button>
+        </form>
+        <ul class="navbar-right" id="header-right">
+          <li>
+            <button type="button" class="navbar-toggle">
+              <span class="icon-bar header-nav-bar"></span>
+              <span class="icon-bar header-nav-bar"></span>
+              <span class="icon-bar header-nav-bar"></span>
+            </button>
+          </li>
+          <li><a class="searchBtn search-btn-mobile" href="#"><span class="icon icon-search"></span></a></li>
+          <li>
+            {if condition='!$Think.session.info'}
+            <a class="" href="{:url('user/signIn')}">登陆</a>
+            {else/}
+            <a class="my-home" href="{:url('user/index')}">{$Think.session.info.user_nickname}</a>
+            {/if}
+          </li>
+          <li>
+            {if condition='!$Think.session.info'}
+            <a class="header-hideit" href="{:url('user/signUp')}">注册</a>
+            {else/}
+            <a class="" href="{:url('index/index',['del' => true])}">退出</a>
+            {/if}
+          </li>
+          {if $Think.session.info.status==3}
+          <li><a class="" href="{:url('tutor/index',['tutor_id'=>$Think.session.tutor_info.tutor_id])}">我的主页</a></li>
+          {else/}
+          <li><a class="" {if $Think.session.verify} 
+            href="{:url('betutor/wait')}"
+            {elseif $Think.session.material || $Think.session.topic} 
+            href="{:url('betutor/topic')}"
+            {elseif $Think.session.zhima} 
+            href="{:url('betutor/material')}"
+            {else} 
+            href="{:url('betutor/index')}"
+            {/if}>成为行家</a></li>
+          {/if}
+          <li><a class="header-hideit" href="#">去「分答」</a></li>
+
+        </div>
+        <form class="search" action="{:url('search/index')}" method="GET">
+            <input class="search-content" type="text" placeholder="搜行家、话题、服务" autocomplete="off" name="word" value="{$keywords?$keywords:''}">
+            <input type="hidden" name="city_id" value="1">
+            <div class="search-sug sug"></div>
+        </form>
+        <div class="header-nav-show">
+          <span class="mobile-menu-close">
+            <i class="glyphicon glyphicon-remove"></i>
+          </span>
+          <ul class="nav navbar-nav">
+            <li><a href="{:url('index/index')}">首页</a></li>
+            <li><a href="{:url('category/index')}">职场发展</a></li>
+            <li><a href="#">行业经验</a></li>
+            <li><a href="#">互联网+</a></li>
+            <li><a href="#">创业与投融资</a></li>
+            <li><a href="#">生活服务</a></li>
+            <li><a href="#">心理</a></li>
+            <li><a href="#">投资理财</a></li>
+            <li><a href="#">教育学习</a></li>
+            <li><a href="#">其他</a></li>
+          </ul>
+        </div>
+        <!-- <div class="header-nav-show">
+          <span class="mobile-menu-close">
+            <i class="glyphicon glyphicon-remove"></i>
+          </span>
+          <ul class="nav navbar-nav">
+            <li><a href="{:url('user/index')}">我约的行家</a></li>
+            <li><a href="{:url('user/wishlist')}">心愿单</a></li>
+            {if $Think.session.tutor_info}
+            <li><a href="{:url('user/bookingList')}">预约单</a></li>
+            <li><a href="{:url('user/topicList')}">我的话题</a></li>
+            <li><a href="{:url('user/commentList')}">收到的评论</a></li>
+            {/if}
+            <li><a href="#">我的礼券</a></li>
+          </ul>
+        </div> -->
+      </div>
+    </nav>
+  </div>
+  <script>
+    /*var wait = "{:url('betutor/wait')}";
+    var topic = "{:url('betutor/topic')}";
+    var material = "{:url('betutor/material')}";
+    var index = "{:url('betutor/index')}";
+    function beTutor(){
+      $.post()
+    }*/
+  </script>
+  <script src="__STATIC_PATH__/index/header/js/header.js"></script>

@@ -1,0 +1,199 @@
+
+{include file="common/header"}
+
+<script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.min.js"></script>
+
+<link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet">
+<link href="__STATIC_PATH__/index/index/css/home.css" rel="stylesheet">
+
+  <div id="home-index" class="home-index">
+    <div class="self-container">
+        <div class="index-title text-center">
+            <div class="title-wrapper">
+              <h1>行家指路</h1>
+              <h1>少走弯路</h1>
+            </div>
+            <p>在行，领先的知识技能共享平台</p>
+            <a href="#" target="_blank" class="col-sm-hide">下载客户端</a>
+        </div>
+        <div class="index-search text-center">
+            <form action="{:url('search/index')}">
+            	<div class="search-addr">
+            		<div class="drop-select" id="drop-select">
+                  {$city_info['city_name']}
+                  <i class="icon-arrow"></i>
+                </div>
+            		<ul class="drop-select-option" id="drop-select-option">
+                  <li class="arrow-up"><i></i></li>
+                  {foreach $city as $value}
+                  <li><a href="{:url('index',['city_id'=>$value['city_id']])}"
+                    {if $city_info['city_name'] == $value['city_name']} style="color:#ff946e;" {/if}>{$value['city_name']}</a></li>
+                  {/foreach}
+                </ul>
+            	</div>
+            	<input placeholder="搜行家、话题、服务" type="text" name="word">
+              <input type="hidden" name="city_id" value="{$city_info['city_id']}">
+              <button type="submit">搜索</button>
+            </form>
+        </div>
+    </div>
+  </div>
+  <div id="home-guide" class="home-guide">
+    <div class="self-container">
+      <div class="guide-step text-center">
+          <i class="icon icon-tutor"></i>
+          <h2>海量行家</h2>
+          <p class="col-sm-hide">严选超过8千位行家达人专属服务</p>
+      </div>
+      <div class="guide-step text-center">
+          <i class="icon icon-consultant"></i>
+          <h2>万能顾问</h2>
+          <p class="col-sm-hide">求教专家解惑或与达人切磋</p>
+      </div>
+      <div class="guide-step text-center">
+          <i class="icon icon-service"></i>
+          <h2>按需服务</h2>
+          <p class="col-sm-hide">根据个人所需线上线下灵活沟通</p>
+      </div>
+    </div>
+  </div>
+  <div id="home-content" class="home-content">
+    <div class="self-container">
+      <ul class="content-list">
+        {volist name="tutor_list" id="vo" offset="0" length='4'}
+        <li class="content-list-tutor text-center">
+          <a href="{:url('tutor/index',['tutor_id'=>$vo['tutor_id']])}">
+            <img src="__STATIC_PATH__/{$vo['tutor_img']}" alt="">
+            <div class="tutor-cover"></div>
+            <div class="tutor-info">
+              <h3>{$vo['tutor_name']}</h3>
+              <h4>{$vo['tutor_identity']}</h4>
+              <p class="info-brief">{$vo['topic_title']}</p>
+              <p class="info-detail">
+                <i>『 </i>
+                  <span>{$vo['tutor_lead']}</span>
+                <i> 』</i>
+              </p>
+            </div>
+            <span class="tutor-views">{$vo['total_meet']}人见过</span>
+          </a>
+        </li>
+        {/volist}
+        <li class="content-list-tutor where-to-go text-center">
+          <a href="{:url('subject/index',['adv_id'=>$city_info['adv_id'],'city_id'=>$city_info['city_id']])}">
+            <img src="__STATIC_PATH__/{$city_info['adv_img']}" alt="">
+          </a>
+        </li>
+        {volist name="tutor_list" id="vo" offset="4"}
+        <li class="content-list-tutor text-center">
+          <a href="{:url('tutor/index',['tutor_id'=>$vo['tutor_id']])}">
+            <img src="__STATIC_PATH__/{$vo['tutor_img']}" alt="">
+            <div class="tutor-cover"></div>
+            <div class="tutor-info">
+              <h3>{$vo['tutor_name']}</h3>
+              <h4>{$vo['tutor_identity']}</h4>
+              <p class="info-brief">{$vo['topic_title']}</p>
+              <p class="info-detail">
+                <i>『 </i>
+                  <span>{$vo['tutor_lead']}</span>
+                <i> 』</i>
+              </p>
+            </div>
+            <span class="tutor-views">{$vo['total_meet']}人见过</span>
+          </a>
+        </li>
+        {/volist}
+      </ul>
+      <a href="{:url('category/index',['city_id'=>$city_info['city_id'],'more'=>true])}" class="content-more">发现更多行家</a>
+      <img class="content-adv" src="__STATIC_PATH__/index/index/img/adv.png" alt="">
+    </div>
+  </div>
+  <div class="home-story">
+    <div class="self-container">
+      <h2>在行故事</h2>
+    </div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+          <div class="swiper-slide" style="background-image: url(__STATIC_PATH__/index/index/img/slider1.png);">
+            <a href="{:url('tutor')}">
+              <p class="slide-title">「在行是连接人与人的<br>一万种可能。」</p>
+              <p class="slide-summary">在“有趣然而无用”大行其道的当下，<br>在行所促成的每一次经验交谈都明确的指向“有用”。<br>无论你的问题是“资金不足时如何创业”，<br>还是“姐弟恋中如何扮演好姐姐”<br>——《南方人物周刊》</p>
+            </a>
+          </div>
+          <div class="swiper-slide" style="background-image: url(__STATIC_PATH__/index/index/img/slider2.png);">
+            <a href="{:url('tutor')}">
+              <p class="slide-title">
+              在行是我进行“数字生存实验”<br>的沃土。我要印证一个生命影响<br>另一个生命的可能。
+              </p>
+              <p class="slide-summary">萧秋水,知识管理专家。<br>在行一对一服务已破百单。<br>她通过在行找到了互联网时代新的生存之道。<br>甚至通过在行开展微信私教分享课程。<br>在将认知盈余价值最大化的同时，<br>获得了可观的经济收益。
+              </p>
+              <span class="slide-btn">去萧秋水的行家页</span>
+            </a>
+          </div>
+          <div class="swiper-slide" style="background-image: url(__STATIC_PATH__/index/index/img/slider3.png);">
+            <a href="{:url('tutor')}">
+              <p class="slide-title">「除了社交作用,<br>她们还是我的数据库,<br>知道她们需要什么<br>很重要」</p>
+              <p class="slide-summary">乔齐, <br>女装品牌Georgette.Q创始人。<br>作为在行上的行家,已经见过35个人<br>大部分是科技圈的女高管,是她的目标客户</p>
+              <span class="slide-btn">去乔齐的行家页</span>
+            </a>
+          </div>
+      </div>
+      <i class="swiper-button-next"></i>
+      <i class="swiper-button-prev"></i>
+    </div>
+  </div>
+<script>
+  //搜索
+  /*$('.home-index .index-search button').click(function(){
+    if(!$('.home-index .index-search input').val()) return;
+    window.location.href='{:url("search/index")}?city_id=word='+$('.home-index .index-search input').val();
+  })*/
+
+  var length = $('.title-wrapper h1').length;
+  var k = 0;
+  var w = 0;
+  toRight();
+  function toRight(){
+    $('.title-wrapper h1').eq(k).addClass('is-visible').siblings().removeClass('is-visible');
+    w = $('.title-wrapper h1').eq(k).width();
+    k++;
+    if(k > length - 1){
+      k = 0;
+    }
+    $('.title-wrapper').animate({
+      width: w+"px"
+    }, 1000, function(){
+          $(this).animate({
+        width: "0px",
+      },1000)
+    });
+  }
+  var timer = setInterval(function(){
+    toRight();
+  },2000)
+
+  var swiper = new Swiper('.swiper-container', {
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev',
+      slidesPerView: 1,
+      autoplay: 5000,
+      autoplayDisableOnInteraction: false,
+      loop: true
+  });
+
+  $('#drop-select').click(function(){
+    $('#drop-select-option').slideToggle();
+  })
+
+  $('#home-content ul li').each(function(){
+    $(this).hover(function(){
+      $(this).addClass('tutor-hover');
+    }, function(){
+      $(this).removeClass('tutor-hover');
+    });
+  })
+
+
+</script>
+
+{include file="common/footer"}

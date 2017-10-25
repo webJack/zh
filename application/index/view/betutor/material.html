@@ -1,0 +1,151 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/betutor/css/index.css">
+<div class="zhima_test">
+	<div class="self-container">
+		<!-- 芝麻认证导航 -->
+		<div class="sticky_wrapper">
+			<div class="zhima_expert_nav">
+				<ul class="zhima_expert">			
+					<li class="active">
+						<span>1</span>
+						实名认证
+					</li>
+					<li class="active">
+						<span>2</span>
+						填写行家资料
+					</li>
+					<li>
+						<span>3</span>
+						添加话题
+					</li>
+				</ul>
+				<p class="step_tip">填写行家资料大约需要20-30分钟</p>
+				<p class="step_tip">恭喜，只差最后一步啦，添加话题大约需要5-10分钟时间，请保持耐心哦</p>
+			</div>
+		</div>
+		<!-- 实名认证 -->
+        <!-- 填写资料 -->
+        <div class="zhima_content zhima-material">
+        	<form class="tutor_form">
+        		<div class="form-group">
+			        <div class="profile_picture">
+			            <div class="profile_picture_mask"></div>
+			            <input type="file" name="file" id="avatar">
+			            <img class="avatar" {if $tutor_material['avatar']} src="__STATIC_PATH__/{$tutor_material['avatar']}" data-img="yes" {else/} src="__STATIC_PATH__/index/betutor/img/default_avatar.jpg" data-img="no" {/if}>
+			        </div>
+			        <p class="form_tip"> 头像支持jpg，png，gif格式图片，请尽可能选用160*160以上照片。</p>
+			        <span class="form_error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<i class="zhima_hint">*</i>
+			    	<input name="realname" type="text" maxlength="20" placeholder="行家姓名：真名或常用名，最少2字" class="zhima-material-test" value="{$tutor_material['realname']}">
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+			    <div class="form-group tutor_city">
+			    	<i class="zhima_hint">*</i>
+			    	<select name="city" class="zhima_city zhima-material-test" style="padding-left: 10px;">
+			    		<option value="">请选择：常驻城市</option>
+			    		{foreach $city as $value}
+			    		<option value="{$value['city_id']}" {if $tutor_material['city']==$value['city_id']} selected {/if}>{$value['city_name']}</option>
+			    		{/foreach}
+			    	</select>
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<i class="zhima_hint">*</i>
+			    	<input name="address" type="text" maxlength="20" placeholder="在常驻城市的常活动区域：国贸、中关村，最少2字" class="zhima-material-test" value="{$tutor_material['address']}">
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+			    <div class="row">
+				    <div class="form-group">
+				    	<i class="zhima_hint">*</i>
+				    	<select name="industry" class="zhima-material-test" style="padding-left: 10px;">
+				    		<option value="">请选择：行业</option>
+				    		{foreach $category as $value}
+				    		<option value="{$value['cate_id']}" {if $tutor_material['industry']==$value['cate_id']} selected {/if}>{$value['cate_name']}</option>
+				    		{/foreach}
+				    	</select>
+				    	<span class="form_error zhima-material-error"></span>
+				    </div>
+				    <div class="form-group">
+				    	<i class="zhima_hint">*</i>
+				    	<select name="working_years" class="zhima-material-test" style="padding-left: 10px;">
+				    		<option value="">请选择：工作年限</option>
+				    		<option value="1" {if $tutor_material['working_years']=='1'} selected {/if}>3-5年</option>
+				    		<option value="2" {if $tutor_material['working_years']=='2'} selected {/if}>5-10年</option>
+				    		<option value="3" {if $tutor_material['working_years']=='3'} selected {/if}>10年以上</option>
+				    	</select>
+				    	<span class="form_error zhima-material-error"></span>
+				    </div>
+				</div>
+			    <div class="form-group">
+			    	<i class="zhima_hint">*</i>
+			    	<input name="studio" type="text" maxlength="20" placeholder="任职机构：自由职业者可填写工作室名字，最少2字" class="zhima-material-test" value="{$tutor_material['studio']}">
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<i class="zhima_hint">*</i>
+			    	<input name="occupation" type="text" maxlength="20" placeholder="头衔/职位：自由职业者可注明，最少2字" class="zhima-material-test" value="{$tutor_material['occupation']}">
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+			    <div class="form-group">
+			    	<label class="tutor_test"><span class="zhima_hint">*</span>教育背景/培训经历（最多500字）<span>【示例】</span> </label>
+			    	<textarea rows="6" name="education" maxlength="500" placeholder="2007年9月-2011年7月，北京大学，新闻与传播学专业，硕士研究生，最少20字" class="zhima-material-test">{$tutor_material['education']}</textarea>
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+				<div class="tutor_checkbox">
+				    <label>
+				       	<input name="is_show_education" type="checkbox">
+				       <!--  <span class="checkbox checkbox-false"><i class="icon icon-checkbox"></i></span> -->
+				        向学员公开教育背景/培训经历，以增加行家资质说明
+				    </label>
+				</div>
+				<div class="form-group">
+			    	<label class="tutor_test"><span class="zhima_hint">*</span>职业经历（最多800字）<span>【示例】</span> </label>
+			    	<textarea rows="6" name="experience" maxlength="500" placeholder="可填写多段经历，描述清楚时间段、任职机构、职位，最少20字" class="zhima-material-test">{$tutor_material['experience']}</textarea>
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+				<!-- <div class="form-group">
+							    	<label class="tutor_test">&nbsp;&nbsp;职业资格证书名称（最多300字）</label>
+							    	<textarea rows="6" name="" maxlength="500" placeholder="如法律职业资格证、国家心理咨询师证等能证明职业资格的证书名称，最少5字"></textarea>
+							    	<span class="form_error"></span>
+							    </div> -->
+				<div class="form-group">
+			    	<label class="tutor_test">&nbsp;&nbsp;项目经历（最多800字）<span>【示例】</span> </label>
+			    	<textarea rows="6" name="project" maxlength="500" placeholder="职业生涯中负责过的成功项目，描述清楚项目价值、个人发挥的作用、取得的成果，最少5字">{$tutor_material['project']}</textarea>
+			    </div>
+				<div class="form-group">
+			    	<label class="tutor_test">&nbsp;&nbsp;媒体报道/社交账号链接（最多500字）</label>
+			    	<textarea rows="6" name="media_reports" maxlength="500" placeholder="可复制粘贴多条媒体报道链接，微博知乎Linkedin等社交媒体账号或链接，最少5字">{$tutor_material['media_reports']}</textarea>
+			    </div>
+				<div class="form-group">
+			    	<label class="tutor_test"><span class="zhima_hint">*</span>   自述（最多1000字）</label>
+					<textarea rows="8" name="introduction" maxlength="500" placeholder="介绍一下自己的独特优势吧，以便学员留下深刻印象，包括但不限于：（1）您的独特经历（2）您对所从事行业的独到见解（3）您特别突出的能力（如时间管理、团队管理、沟通能力、学习能力等）（4）您的兴趣爱好（5）其他最少50字" class="zhima-material-test">{$tutor_material['introduction']}</textarea>
+			    	<span class="form_error zhima-material-error"></span>
+			    </div>
+				<div class="form-group">
+			    	<label class="tutor_test">&nbsp;&nbsp;所获奖项（最多300字）</label>
+			    	<textarea rows="6" name="awards" maxlength="500" placeholder="可证明资历的奖项名称">{$tutor_material['awards']}</textarea>
+			    </div>
+				<div class="tutor_checkbox">
+			        <label>
+			            <input id="is_agreed" type="checkbox" checked="">
+			            <!-- <span class="checkbox checkbox-true"><i class="icon icon-checkbox"></i></span> -->
+			            本人承诺为以上信息的真实性及准确性负责，并会在任职信息变更时及时更新行家资料
+			        </label>
+			    </div>
+			    <div class="form-group tutor_submit">
+					<input type="button" name="" value="下一项：添加话题" class="zhima_next zhima-material-btn">
+			    </div>
+        	</form>
+        </div>
+        <!-- 添加话题 -->
+	</div>
+</div>
+<script>
+	var addMaterial_ajax_url = "{:url('betutor/addMaterial')}";
+	var to_url = "{:url('betutor/topic')}";
+</script>
+<script src="__STATIC_PATH__/index/betutor/js/index.js"></script>
+{include file="common/footer"}

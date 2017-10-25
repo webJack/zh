@@ -1,0 +1,29 @@
+{include file="public/header"} 
+
+
+<div class="container mt-3">        
+    <h3>用户-专家信息审核首页</h3>
+    <div class="form-group">
+        <label for="">真实姓名</label>
+        {$user_info.realname}
+    </div>
+    <div class="form-group">
+        <label>身份证号码</label>
+        {$user_info.ID}
+    </div>
+    <div class="form-group">
+        <label>时间原因，这里假装有两张表</label>
+    </div>
+    <div class="form-group">
+        <a href="{:url('pass',['user_id'=>$user_info.user_id])}" class="btn btn-info">审核通过</a>
+        <a class="btn btn-danger" onclick="$('.info_box').show();">审核不通过</a>
+    </div>
+    <div class="form-group">
+        <form action="{:url('reject',['user_id'=>$user_info.user_id])}" class="info_box" style="display: none;" method="get">
+            <textarea name="reason" rows="10" cols="100" style="resize: none;display: block;"></textarea>
+            <input style='display: block;margin-top: 10px;' type="submit" class="btn btn-info" value="提交">
+        </form>        
+    </div>
+</div>
+
+{include file="public/footer"}

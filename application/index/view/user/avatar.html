@@ -1,0 +1,107 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/index.css">
+<div class="personal_content">
+	<div class="self-container">
+		<div class="personal_left">
+			<div class="user_head_pic">
+				<img src="__STATIC_PATH__/{$user_info['user_img']}">
+			</div>
+			<ul class="setting_list">
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('index')}">
+						<em class="active_icon"></em>
+						我约的行家
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('wishlist')}">
+						<em class="active_icon"></em>
+						心愿单
+					</a>
+				</li>
+				{if $Think.session.tutor_info}
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('topicList')}">
+						<em class="active_icon"></em>
+						我的话题
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('bookingList')}">
+						<em class="active_icon"></em>
+						预约单
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('commentList')}">
+						<em class="active_icon"></em>
+						收到的评论
+					</a>
+				</li>
+				{/if}
+				<li class="setting_menu">	
+					<a class="setting_item" href="{:url('coupon')}">
+						<em class="active_icon"></em>
+						我的礼券
+					</a>
+				</li>
+				<li class="setting_menu active">
+					<a class="setting_item">
+						<em class="active_icon"></em>
+						个人设置
+						<span class="list_icon_box">
+							<i class="drop_icon"></i>
+						</span>
+					</a>
+					<ul class="setting_user_list" style="display: block">
+						<li><a href="{:url('user/profile')}">个人资料</a></li>
+						<li class="active"><a href="{:url('user/avatar')}">头像设置</a></li>
+						<li><a href="{:url('user/mobile')}">验证手机</a></li>
+						<li><a href="{:url('user/password')}">设置密码</a></li>
+						<li><a href="{:url('user/receipt_accounts')}">收款及隐私</a></li>
+					</ul>
+				</li>
+			</ul>  
+		</div>
+		<div class="personal_right">
+			<div class="personal_info">
+				<div class="user_content">
+					<h2>上传头像</h2>
+					<div class="user_set_headimg">
+						<div class="setting_content">
+							{if $show}
+							<div class="form-tip form-success">修改成功</div>
+							{/if}
+							<div class="setting_img">									
+								<div class="avatar">
+									<img src="__STATIC_PATH__/{$user_info['user_img']}">
+								</div>
+								<div class="img_cover"></div>
+								<div class="over"><img style="width:160px;height:160px;" src="__STATIC_PATH__/{$user_info['user_img']}"></div>
+							</div>
+							 <form id="formImg"> 
+							
+								<div class="img_upload">
+									<p>支持jpg，png，gif格式图片，请尽可能选用160*160以上照片</p>
+									<span class="form_error"></span>
+									<div class="select_file">
+										<a class="btn btn-primary btn-up" id="imgBtn" href="javascript:void 0;">电脑中选一张</a>
+										<input type="file" name="user_img" id="realFile">
+									</div>
+									<input type="button" class="btn btn-info" value="保存" onclick="editAvatar()">
+								</div>	
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	var editAvatar_ajax_url = "{:url('editAvatar')}";
+	var to_url = "{:url('avatar',['show' => true])}";
+</script>
+<script src="__STATIC_PATH__/index/user/js/index.js"></script>
+{include file="common/footer"}

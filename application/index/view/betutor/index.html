@@ -1,0 +1,61 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/betutor/css/index.css">
+<div class="zhima_test">
+	<div class="self-container">
+		<!-- 芝麻认证导航 -->
+		<div class="sticky_wrapper">
+			<div class="zhima_expert_nav">
+				<ul class="zhima_expert">			
+					<li class="active">
+						<span>1</span>
+						实名认证
+					</li>
+					<li>
+						<span>2</span>
+						填写行家资料
+					</li>
+					<li>
+						<span>3</span>
+						添加话题
+					</li>
+				</ul>
+				<p class="step_tip">填写行家资料大约需要20-30分钟</p>
+				<p class="step_tip">恭喜，只差最后一步啦，添加话题大约需要5-10分钟时间，请保持耐心哦</p>
+			</div>
+		</div>
+		<!-- 实名认证 -->
+		<div class="zhima_content zhima-verify">
+			<img src="__STATIC_PATH__/index/user/img/zhima.jpg" alt="">
+			<p class="zhima_intro">
+                由「芝麻信用」提供行家真实身份认证服务。<br>
+                目前仅支持支付宝实名认证用户进行认证，<br>
+                非支付宝用户请耐心等待，我们正在接入更丰富的认证方式。
+            </p>
+            <p class="zhima_tip">
+                所有信息均保密，仅用作身份认证，请放心填写！          
+            </p>
+            <form class="zhima_form">
+            	<div class="form-group">
+            		<i class="zhima_hint">*</i>
+            		<input type="text" placeholder="真实姓名" name="realname" class="form-control">
+            		<span class="form_error"></span>
+            	</div>
+            	<div class="form-group">
+            		<i class="zhima_hint">*</i>
+            		<input type="text" placeholder=身份证号 name="ID" class="form-control">
+            		<span class="form_error"></span>
+            	</div>
+            	<div class="btn_warp">
+            		<input type="button" value="提交认证" name="" class="zhima_authen form-control btn btn-primary zhima-verify-btn">
+            	</div>
+            </form>
+        </div>
+	</div>
+</div>
+<script>
+    var zhimaCheck_ajax_url = "{:url('betutor/zhimaCheck')}";
+    var to_url = "{:url('betutor/zhima')}";
+</script>
+<script src="__STATIC_PATH__/index/betutor/js/index.js"></script>
+{include file="common/footer"}

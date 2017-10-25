@@ -1,0 +1,40 @@
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/signIn.css">
+<div class="content">
+	<div class="register">
+		<div class="reg-content">
+			<h1>欢迎登录「在行」</h1>
+			<div class="login-overlay-inner signup-panel">
+        <p class="signup-tip">无需注册，直接用社交账号登录</p>
+        <a class="btn-primary btn-hg login-weibo">
+          <span class="icon icon-weibo"></span>
+        </a>
+        <a class="btn-primary btn-hg login-weixin">
+          <span class="icon icon-weixin"></span>
+        </a>
+        <a class="btn-primary btn-hg login-baidu">
+          <span class="icon icon-baidu"></span>
+        </a>
+        <div class="phone-login">
+          <!-- <a class="btn-hg login-phone">
+            <span class="icon icon-phone"></span>手机登录
+          </a> -->
+          <div class="tisi all"></div>
+  				<input type="text" placeholder="手机号" name="user_phone" class="zh-value">
+  				<div class="tisi zhanghao">请填写手机号</div>
+  				<input type="password" placeholder="密码" name="user_pwd" class="password-value">
+  				<div class="tisi password">请填写密码</div>
+  				<input type="button" value="登录" class="btn" onclick="doSignIn()">
+            <p class="to-signup">没有账号？<a href="{:url('user/signUp')}">现在去注册</a></p>
+            <p class="to-resetpassword"><a href="{:url('user/reset')}">忘记密码？</a></p>
+        </div>
+      </div>
+		</div>
+	</div>
+</div>
+<script>
+	var login_ajax_url = "{:url('user/doSignIn')}";
+	var to_url = "{:url('index/index')}";
+</script>
+<script src="__STATIC_PATH__/index/user/js/signIn.js"></script>
+{include file="common/footer"}

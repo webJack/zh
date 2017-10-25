@@ -1,0 +1,31 @@
+{include file="public/header"} 
+
+<div class="mt-3">
+    <a href="{:url('add')}" class="btn btn-info">添加广告</a>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>广告图</th>
+            <th>广告大图</th>
+            <th>分类ID</th>
+            <th>操作</th>
+        </tr>
+        {foreach $adv_list as $value}
+        <tr>
+            <td>{$value['adv_id']}</td>
+            <td title="{$value['adv_img']}">{$value['adv_img']}</td>
+            <td title="{$value['adv_bigimg']}">{$value['adv_bigimg']}</td>
+            <td title="{$value['cate_name']}">{$value['cate_name']}</td>
+            <td>
+                <a href="{:url('edit',['adv_id'=>$value['adv_id']])}" class="btn btn-info">编辑</a>
+                <a href="{:url('delete',['adv_id'=>$value['adv_id']])}" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+    <div>
+     {$adv_list->render()}
+    </div>
+</div>
+
+{include file="public/footer"}

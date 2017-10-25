@@ -1,0 +1,57 @@
+{include file="public/header"} 
+
+ 
+<div class="mt-3">
+    <form class="form-inline" style="margin:20px 0;" action="">
+      <div class="form-group">
+            <label>话题分类</label>
+            <select name="cate_id" class="form-control">
+                <option value="">请选择</option>
+                {foreach $cate_list as $value}
+                    <option value="{$value['cate_id']}" {if $cate_id==$value['cate_id']} selected {/if}>{$value['cate_name']}</option>
+                    <!-- <?php if (isset($value['child_menu'])){ ?> -->
+                    {foreach $value['child_menu'] as $value2nd}
+                        <option value="{$value2nd['cate_id']}" {if $cate_id==$value2nd['cate_id']} selected {/if}>&nbsp;&nbsp;{$value2nd['cate_name']}</option>
+                        <!-- <?php if (isset($value2nd['child_menu'])){ ?> -->
+                        {foreach $value2nd['child_menu'] as $value3th}
+                        <option value="{$value3th['cate_id']}" {if $cate_id==$value3th['cate_id']} selected {/if}>&nbsp;&nbsp;&nbsp;&nbsp;{$value3th['cate_name']}</option>
+                        {/foreach}
+                        <!-- <?php } ?> -->
+                    {/foreach}
+                    <!-- <?php } ?> -->
+                {/foreach}
+            </select>
+        </div>
+      <button type="submit" class="btn btn-primary">搜索</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>话题</th>
+            <th>分类</th>
+            <th>价格</th>
+            <th>时长</th>
+            <th>行家</th>
+            <th>操作</th>
+        </tr>
+        {foreach $topic_list as $value}
+        <tr>
+            <td>{$value['topic_id']}</td>
+            <td title="{$value['topic_title']}">{$value['topic_title']}</td>
+            <td title="{$value['cate_name']}">{$value['cate_name']}</td>
+            <td>￥{$value['price']}</td>
+            <td>{$value['duration']}个小时</td>
+            <td title="{$value['tutor_name']}">{$value['tutor_name']}</td>
+            <td>
+                <a href="{:url('edit',['cate_id'=>$value['topic_id']])}" class="btn btn-info">编辑</a>
+                <a href="{:url('delete',['topic_id'=>$value['topic_id']])}" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+    <div>
+     {$topic_list->render()}
+    </div>
+</div>
+
+{include file="public/footer"}

@@ -1,0 +1,50 @@
+{include file="public/header"} 
+
+<div class="self-container mt-3">
+    <h3>行家详情编辑页</h3>
+     <form action="{:url('update')}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label >姓名</label>
+            <input type="text" class="form-control" value="{$tutor_info['tutor_name']}" name="tutor_name">
+        </div>
+        <div class="form-group">
+            <label >头衔</label>
+            <input type="text" class="form-control" value="{$tutor_info['tutor_identity']}" name="tutor_identity">
+        </div>
+        <div class="form-group">
+            <label >城市</label>
+            <select name="city_id" class="form-control">
+                <option value="">请选择</option>
+               {foreach $city_list as $value}
+                <option {if $value['city_id']==$tutor_info['city_id']} selected {/if} value="{$value['city_id']}">{$value['city_name']}</option>
+               {/foreach}
+            </select>
+        </div>               
+        <div class="form-group">
+            <label >住址</label>
+            <input type="text" class="form-control" value="{$tutor_info['location']}" name="location">
+        </div>
+        <div class="form-group">
+            <label >头像</label>
+            <input type="file" name="tutor_img">
+        </div>      
+        <div class="form-group">
+            <label >简介</label>
+            <textarea id="text_content" name="tutor_lead">{$tutor_info.tutor_lead}</textarea>
+        </div>        
+        <div class="form-group">
+            <input type="hidden" name="img" value="{$tutor_info['tutor_img']}">
+            <input type="hidden" name="tutor_id" value="{$tutor_info.tutor_id}">
+            <input type="submit" class="btn btn-info" value="更新">
+        </div>
+     </form>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/library/ueditor/ueditor.all.min.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('text_content');
+</script>
+
+{include file="public/footer"}

@@ -1,0 +1,169 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/index.css">
+<div class="personal_content">
+	<div class="self-container">
+		<div class="personal_left">
+			<div class="user_head_pic">
+				<img src="__STATIC_PATH__/{$user_info['user_img']}">
+			</div>
+			<ul class="setting_list">
+				<li class="setting_menu active">
+					<a class="setting_item" href="{:url('index')}">
+						<em class="active_icon"></em>
+						我约的行家
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('wishlist')}">
+						<em class="active_icon"></em>
+						心愿单
+					</a>
+				</li>
+				{if $Think.session.tutor_info}
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('topicList')}">
+						<em class="active_icon"></em>
+						我的话题
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('bookingList')}">
+						<em class="active_icon"></em>
+						预约单
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('commentList')}">
+						<em class="active_icon"></em>
+						收到的评论
+					</a>
+				</li>
+				{/if}
+				<li class="setting_menu">	
+					<a class="setting_item" href="{:url('coupon')}">
+						<em class="active_icon"></em>
+						我的礼券
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item">
+						<em class="active_icon"></em>
+						个人设置
+						<span class="list_icon_box">
+							<i class="drop_icon"></i>
+						</span>
+					</a>
+					<ul class="setting_user_list">
+						<li><a href="{:url('profile')}">个人资料</a></li>
+						<li><a href="{:url('avatar')}">头像设置</a></li>
+						<li><a href="{:url('mobile')}">验证手机</a></li>
+						<li><a href="{:url('password')}">设置密码</a></li>
+						<li><a href="{:url('receipt_accounts')}">收款及隐私</a></li>
+					</ul>
+				</li>
+			</ul>  
+		</div>
+		<div class="personal_right">
+			{if $order_list->isEmpty()}
+			<div class="personal_info">
+				<div class="user_content">
+					<h2>我约的人</h2>
+					<div class="expert_content">
+						<p class="none">
+							╮(╯﹏╰）╭真忧伤，我还没有约过人唉。
+							<a href="">立即约人去！</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			{else/}
+			<ul class="user-orders-list" id="meetingsList">
+				{foreach $order_list as $value}
+				<li>
+					<div class="user-order-hd">
+						<span class="user-order-num">编号：{$value['order_id']}</span>
+						<span class="user-order-time">发起时间：{$value['create_time']|date="Y-m-d H:i:s",###}</span>
+					</div>
+					<div class="user-order-bd">
+						<div class="user-order-content">
+							<div class="user-order-inner">
+								<a class="tutor-avatar" href="{:url('tutor/index',['tutor_id' => $value['tutor_id']])}">
+									<img src="__STATIC_PATH__/{$value['tutor_img']}">
+								</a>
+								<div class="user-order-info">
+									<h4>
+										<a class="user-order-topic" href="{:url('tutor/index',['tutor_id' => $value['tutor_id']])}">{$value['topic_title']}</a>
+									</h4>
+									<p>
+										<a class="user-name" href="{:url('tutor/index',['tutor_id' => $value['tutor_id']])}">{$value['tutor_name']}</a>{$value['tutor_identity']}</p>
+								</div>
+							</div>
+						</div>
+						<div class="user-order-right">
+							<div class="user-order-price">
+								<div class="user-order-inner">
+									{$value['price']}元
+								</div>
+							</div>
+							<div class="user-order-status">
+								<div class="user-order-inner">
+									{if $value['status']==0}
+									请等待行家确认
+									{elseif $value['status']==1}
+									<a class="detail-btn btn-plat btn-sm pay" data-order_id="{$value['order_id']}" data-topic_id="{$value['topic_id']}" data-tutor_id="{$value['tutor_id']}" href="javascript:void(0)">去付款</a>
+									{elseif $value['status']==2}
+									<a class="detail-btn btn-plat btn-sm comment" href="javascript:void(0)">评论</a>
+									{else/}
+									交易完成
+									{/if}
+								</div>
+							</div>
+							<div class="user-order-func order-func">
+								<div class="user-order-inner">
+								    <a class="detail-btn btn-plat btn-sm" href="javascript:void(0)">查看详情</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="meeting-descriptions descriptions_content">
+						<div class="meeting-description">
+							<h3>您想请教的问题是：</h3>
+							<div class="meeting-txt">
+								{$value['question']}
+							</div>
+						</div>
+						<div class="meeting-description">
+							<h3>您的个人简介:</h3>
+							<div class="meeting-txt">
+								{$value['description']}
+							</div>
+						</div>
+					</div>
+					<div class="meeting-descriptions comment_content">
+						<div class="meeting-description">
+							<h3>评论：</h3>
+							<textarea rows="3" style="width:100%;" maxlength="500"></textarea>
+							<span class="form_error"></span>
+							<h3>评分：</h3>
+							<input type="text" name="score" class="">
+							<div class="comment-btn">                                    
+								<a href="javascript: void(0);" data-order_id="{$value['order_id']}" data-topic_id="{$value['topic_id']}" class="btn-primary btn-md">评论</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+			{$order_list->render()}
+			{/if}
+		</div>
+	</div>
+</div>
+<script>
+	var comment_ajax_url = "{:url('user/addComment')}";
+	var pay_ajax_url = "{:url('user/pay')}";
+	var index_ajax_url = "{:url('user/index')}";
+</script>
+<script src="__STATIC_PATH__/index/user/js/index.js"></script>
+{include file="common/footer"}

@@ -1,0 +1,52 @@
+{include file="public/header"} 
+
+<div class="mt-3">
+    <form class="form-inline" style="margin:20px 0;" action="">
+      <div class="form-group">
+        <label>姓名</label>
+        <input type="text" class="form-control" name="tutor_name" placeholder="Jane Doe" value="{$tutor_name}">
+      </div>
+      <div class="form-group">
+        <label>城市</label>
+        <select class="form-control" name="city_id">
+            <option value="">请选择</option>
+           {foreach $city_list as $value}
+            <option value="{$value['city_id']}" {if $value['city_id']==$city_id} selected {/if}>{$value['city_name']}</option>
+           {/foreach}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">搜索</button>
+    </form>
+    <table class="table">
+        <tr>
+            <th>编号</th>
+            <th>姓名</th>
+            <th>用户ID</th>
+            <th>头衔</th>
+            <th>城市</th>
+            <th>住址</th>
+            <th>操作</th>
+        </tr>
+        {foreach $tutor_list as $value}
+        <tr>
+            <td>{$value['tutor_id']}</td>
+            <td title="{$value['tutor_name']}">{$value['tutor_name']}</td>
+            <td>{$value['user_id']}</td>
+            <td title="{$value['tutor_identity']}">{$value['tutor_identity']}</td>
+            <td title="{$value['city_name']}">{$value['city_name']}</td>
+            <td title="{$value['location']}">{$value['location']}</td>
+            <td>
+                <a href="{:url('edit',['tutor_id'=>$value['tutor_id']])}" class="btn btn-info">编辑</a>
+                <a href="{:url('delete',['tutor_id'=>$value['tutor_id']])}" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+        {/foreach}
+    </table>
+    <div>
+        {$tutor_list->render()}
+    </div>
+</div>
+<script>
+    
+</script>
+{include file="public/footer"}

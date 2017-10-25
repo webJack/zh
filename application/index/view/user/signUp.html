@@ -1,0 +1,38 @@
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/signUp.css">
+<div class="content">
+	<div class="register">
+		<div class="reg-content">
+			<h1>欢迎加入在行</h1>
+			<!-- <form action=""> -->
+				<div class="tisi all"></div>
+				<input type="text" placeholder="手机号码" class="phone-value" name="user_phone">
+				<div class="tisi phone">请填写手机号码</div>
+				<input class="yanzheng" type="text" placeholder="验证码" name="user_check">
+				<div class="cap"><img src="{:url('setCaptcha')}" alt="" title="看不清？点击换一张" onclick="changeCaptcha()"></div>
+				<div class="tisi yzti">请填写验证码</div> 
+				<input type="button" value="发送手机验证码" class="btn" onclick="sendCaptcha()">
+				<input type="text" placeholder="手机验证码" name="user_phoneCheck" class="zh-value">
+				<div class="tisi phoneCheck">请填写手机验证码</div>
+				<input type="text" placeholder="昵称" name="user_nickname" class="zh-value">
+				<div class="tisi nickname">请填写昵称</div>
+				<input type="password" placeholder="密码" name="user_pwd" class="password-value">
+				<div class="tisi password">请填写密码</div>
+				<input type="button" value="注册" class="btn" onclick="doSignUp()">
+			<!-- </form> -->
+			<span>已有账号？现在去<a href="{:url('user/signIn')}">登录</a></span>
+		</div>
+	</div>
+</div>
+<script>
+	var sendCap_ajax_url = "{:url('user/sendCaptcha')}";
+	var reg_ajax_url = "{:url('user/doSignUp')}";
+	var to_url = "{:url('index/index')}";
+	var setCap = "{:url('setCaptcha')}";
+
+	function changeCaptcha(){
+		$('.cap img').attr('src',setCap);
+	}
+</script>
+<script src="__STATIC_PATH__/index/user/js/signUp.js"></script>
+{include file="common/footer"}

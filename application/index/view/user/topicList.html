@@ -1,0 +1,282 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/index.css">
+<style>
+.user-orders-list .user-order-bd {
+    height: 50px;
+}
+.user-orders-list .user-order-bd .user-order-content {
+    width: 325px;
+}
+.user-orders-list .user-order-bd .user-order-info {
+    margin-left: 0;
+}
+.user-orders-list .user-order-bd .user-order-duration {
+    width: 74px;
+}
+.user-orders-list .user-order-bd .user-order-score {
+    width: 74px;
+}
+.user-orders-list .user-order-bd .user-order-meet {
+    width: 94px;
+}
+.user-orders-list .user-order-bd .user-order-func {
+    width: 131px;
+}
+.user-orders-list .user-order-bd .user-order-price, .user-orders-list .user-order-bd .user-order-duration, .user-orders-list .user-order-bd .user-order-score, .user-orders-list .user-order-bd .user-order-meet {
+    border-right: 1px solid #e8e8e8;
+}
+.user-orders-list .user-order-bd .user-order-func, .user-orders-list .user-order-bd .user-order-price, .user-orders-list .user-order-bd .user-order-duration, .user-orders-list .user-order-bd .user-order-score, .user-orders-list .user-order-bd .user-order-meet {
+    float: left;
+    display: table;
+    height: 100%;
+    text-align: center;
+    padding: 0 3px;
+    line-height: 34px;
+}
+
+.addTopic{
+    text-align: right;
+    width: 100%;
+    margin: 20px 0;
+}
+.addTopic a {
+    margin-left: 20px;
+    vertical-align: middle;
+}
+.addTopic .hidden{
+	display: none;
+}
+@media only screen and (max-width:769px){
+	.user-orders-list .user-order-bd .user-order-content {
+	    width: 100%;
+	}
+	.user-orders-list .user-order-bd .user-order-price {
+    	width: 25%;
+  	}
+	.user-orders-list .user-order-bd .user-order-duration {
+	    width: 25%;
+	}
+	.user-orders-list .user-order-bd .user-order-score {
+	    width: 25%;
+	}
+	.user-orders-list .user-order-bd .user-order-meet {
+	    width: 25%;
+	}
+	.user-orders-list .user-order-bd .user-order-func {
+	    width: 100%;
+	    padding: 6px 0;
+	    height: 36px;
+	    border-top: 1px solid #e8e8e8;
+	    line-height: 20px;
+	}
+	.user-orders-list .user-order-bd .user-order-meet {
+	    border-right: none;
+	}
+	.user-orders-list .user-order-bd .user-order-func, .user-orders-list .user-order-bd .user-order-price, .user-orders-list .user-order-bd .user-order-duration, .user-orders-list .user-order-bd .user-order-score, .user-orders-list .user-order-bd .user-order-meet {
+	    height: 36px;
+	}
+}
+
+/*select, option {
+	padding-left:30px;
+}*/
+</style>
+<div class="personal_content">
+	<div class="self-container">
+		<div class="personal_left">
+			<div class="user_head_pic">
+				<img src="__STATIC_PATH__/{$user_info['user_img']}">
+			</div>
+			<ul class="setting_list">
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('index')}">
+						<em class="active_icon"></em>
+						我约的行家
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('wishlist')}">
+						<em class="active_icon"></em>
+						心愿单
+					</a>
+				</li>
+				{if $Think.session.tutor_info}
+				<li class="setting_menu active">
+					<a class="setting_item" href="{:url('topicList')}">
+						<em class="active_icon"></em>
+						我的话题
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('bookingList')}">
+						<em class="active_icon"></em>
+						预约单
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('commentList')}">
+						<em class="active_icon"></em>
+						收到的评论
+					</a>
+				</li>
+				{/if}
+				<li class="setting_menu">	
+					<a class="setting_item" href="{:url('coupon')}">
+						<em class="active_icon"></em>
+						我的礼券
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item">
+						<em class="active_icon"></em>
+						个人设置
+						<span class="list_icon_box">
+							<i class="drop_icon"></i>
+						</span>
+					</a>
+					<ul class="setting_user_list">
+						<li><a href="{:url('profile')}">个人资料</a></li>
+						<li><a href="{:url('avatar')}">头像设置</a></li>
+						<li><a href="{:url('mobile')}">验证手机</a></li>
+						<li><a href="{:url('password')}">设置密码</a></li>
+						<li><a href="{:url('receipt_accounts')}">收款及隐私</a></li>
+					</ul>
+				</li>
+			</ul>  
+		</div>
+
+		<div class="personal_right">
+			<div class="addTopic">                                    
+				<a href="javascript: void(0);" class="btn-primary btn-md addTp">添加话题</a>
+				<a href="javascript: void(0);" class="btn-primary btn-md hidden returnTp">返回</a>
+			</div>
+			<ul class="user-orders-list" id="meetingsList">
+				{foreach $topic_list as $value}
+				<li>
+					<div class="user-order-hd">
+						<span class="user-order-num">编号：{$value['topic_id']}</span>
+						<span class="user-order-time">发起时间：{$value['create_time']|date="Y-m-d H:i:s",###}</span>
+					</div>
+					<div class="user-order-bd">
+						<div class="user-order-content">
+							<div class="user-order-inner">
+								<div class="user-order-info">
+									<h4>{$value['topic_title']}</h4>
+								</div>
+							</div>
+						</div>
+						<div class="user-order-right">
+							<div class="user-order-price">
+								<div class="user-order-inner">
+									{$value['price']}元
+								</div>
+							</div>
+							<div class="user-order-duration">
+								<div class="user-order-inner">
+									约{$value['duration']}小时
+								</div>
+							</div>
+							<div class="user-order-score">
+								<div class="user-order-inner">
+									{$value['avg_score']}分
+								</div>
+							</div>
+							<div class="user-order-meet">
+								<div class="user-order-inner">
+									{$value['meet_number']}人见过
+								</div>
+							</div>
+							<div class="user-order-func topic-func">
+								<div class="user-order-inner">
+								    <a class="detail-btn btn-plat btn-sm" href="javascript:void(0)">话题详情</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="meeting-descriptions topic-content">
+						<div class="meeting-description">
+							<div class="meeting-txt">
+								{$value['topic_content']}
+							</div>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+
+			<!-- 添加话题 -->
+			<div class="zhima_content hidden">
+	        	<form class="tutor_form">
+	        		<div class="form-group">
+				    	<i class="zhima_hint">*</i>
+				    	<input name="topic_title" type="text" maxlength="20" placeholder="话题名称：提炼话题的核心要点，方便学员筛选，最少5字">
+				    	<span class="form_error topic_error"></span>
+				    </div>
+				    <div class="form-group tutor_city">
+				    	<i class="zhima_hint">*</i>
+				    	<select class="zhima_city zhima_duration" name="duration" style="padding-left: 10px;">
+				    		<option value="">请选择：大致时间</option>
+				    			<option value="0.5">0.5小时</option>
+								<option value="1">1小时</option>
+								<option value="1.5">1.5小时</option>
+								<option value="2">2小时</option>
+								<option value="2.5">2.5小时</option>
+								<option value="3">3小时</option>
+				    	</select>
+				    	<span class="form_error"></span>
+				    </div>
+				    <div class="form-group tutor_city">
+				    	<i class="zhima_hint">*</i>
+				    	<select class="zhima_city zhima_cate" name="cate_id" style="padding-left: 10px;">
+				    		<option value="">请选择：话题分类</option>
+							{foreach $cate_list as $value}
+			                    <option value="{$value['cate_id']}" disabled>{$value['cate_name']}</option>
+			                    <!-- <?php if (isset($value['child_menu'])){ ?> -->
+			                    {foreach $value['child_menu'] as $value2nd}
+			                        <option value="{$value2nd['cate_id']}">&nbsp;&nbsp;&nbsp;{$value2nd['cate_name']}</option>
+			                        <!-- <?php if (isset($value2nd['child_menu'])){ ?> -->
+			                        {foreach $value2nd['child_menu'] as $value3th}
+			                        <option value="{$value3th['cate_id']}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$value3th['cate_name']}</option>
+			                        {/foreach}
+			                        <!-- <?php } ?> -->
+			                    {/foreach}
+			                    <!-- <?php } ?> -->
+			                {/foreach}
+				    	</select>
+				    	<span class="form_error"></span>
+				    </div>
+				    <div class="form-group">
+				    	<i class="zhima_hint">*</i>
+				    	<input name="price" type="text" maxlength="20" placeholder="话题价格" value="">
+				    	<span class="tutor_form_tip">价格不代表行家资历及水平，而是学员用来向知识分享者表达感谢的金额。在行的行家均价约为300元，建议您将价格设定在200-400元区间，更容易被学员约见。</span>
+				    	<span class="form_error"></span>
+				    </div>
+				    <div class="form-group">
+				    	<label class="tutor_test"><span class="zhima_hint">*</span>话题大纲/要点（最多800字）<span>【示例】</span> </label>
+				    	<textarea rows="6" name="topic_content" maxlength="500" placeholder="不少于5条要点，同一主题（1）教你科学的练习方法，多种训练方法结合练习腹肌（2）短期见效，让你越练越High（3）为你量身定制饮食计划最少20字"></textarea>
+				    	<span class="form_error"></span>
+				    </div>
+				    <div class="form-group">
+			    		<label class="tutor_test"><span class="zhima_hint">*</span>您在该领域的资历和成就（最多800字）<span>【示例】</span> </label>
+			    		<textarea rows="6" name="topic_achievement" maxlength="500" placeholder="不少于5条要点，同一主题（1）教你科学的练习方法，多种训练方法结合练习腹肌（2）短期见效，让你越练越High（3）为你量身定制饮食计划最少20字" class="zhima-topic-test"></textarea>
+			    		<span class="form_error"></span>
+				    </div>
+				    <div class="form-group">
+				    	<label class="tutor_test">补充更多想说的（最多1000字）</label>
+				    	<textarea rows="6" name="summary" maxlength="500" placeholder="包括但不限于：你想与学员分享的心情、学员约见前需做哪些准备、话题涉及的方法论模型和工具"></textarea>
+				    </div>
+				    <div class="addTopic">                                    
+						<a href="javascript: void 0;" class="btn-primary btn-md save" data-tutor_id="{$Think.session.tutor_info.tutor_id}">保存</a>
+					</div> 
+	        	</form>
+	        </div>
+		</div>
+	</div>
+</div>
+<script>
+	var to_ajax_url = "{:url('user/topicList')}";
+	var addTopic_ajax_url = "{:url('user/addTopic')}";
+</script>
+<script src="__STATIC_PATH__/index/user/js/index.js"></script>
+{include file="common/footer"}

@@ -1,0 +1,154 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/index.css">
+<style>
+.user-orders-list .user-order-bd {
+    height: auto;
+    overflow: hidden;
+}
+.user-orders-list .user-order-bd .user-order-content {
+	border-right: none;
+}
+.user-orders-list .user-order-bd .user-order-content {
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px;
+}
+.reply{
+	color: #ff946e;
+}
+.reply-btn{
+	display: inline-block;
+    /* line-height: 26px; */
+    float: right;
+    margin-top: 7px;
+    height: 28px;
+    width: 80px;
+}
+</style>
+<div class="personal_content">
+	<div class="self-container">
+		<div class="personal_left">
+			<div class="user_head_pic">
+				<img src="__STATIC_PATH__/{$user_info['user_img']}">
+			</div>
+			<ul class="setting_list">
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('index')}">
+						<em class="active_icon"></em>
+						我约的行家
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('wishlist')}">
+						<em class="active_icon"></em>
+						心愿单
+					</a>
+				</li>
+				{if $Think.session.tutor_info}
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('topicList')}">
+						<em class="active_icon"></em>
+						我的话题
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('bookingList')}">
+						<em class="active_icon"></em>
+						预约单
+					</a>
+				</li>
+				<li class="setting_menu active">
+					<a class="setting_item" href="{:url('commentList')}">
+						<em class="active_icon"></em>
+						收到的评论
+					</a>
+				</li>
+				{/if}
+				<li class="setting_menu">	
+					<a class="setting_item" href="{:url('coupon')}">
+						<em class="active_icon"></em>
+						我的礼券
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item">
+						<em class="active_icon"></em>
+						个人设置
+						<span class="list_icon_box">
+							<i class="drop_icon"></i>
+						</span>
+					</a>
+					<ul class="setting_user_list">
+						<li><a href="{:url('profile')}">个人资料</a></li>
+						<li><a href="{:url('avatar')}">头像设置</a></li>
+						<li><a href="{:url('mobile')}">验证手机</a></li>
+						<li><a href="{:url('password')}">设置密码</a></li>
+						<li><a href="{:url('receipt_accounts')}">收款及隐私</a></li>
+					</ul>
+				</li>
+			</ul>  
+		</div>
+		<div class="personal_right">
+			{if !$comment_list}
+			<div class="personal_info">
+				<div class="user_content">
+					<div class="expert_content">
+						<p class="none">
+							╮(╯﹏╰）╭真忧伤，还没有人评论我唉。
+						</p>
+					</div>
+				</div>
+			</div>
+			{else/}
+			<ul class="user-orders-list" id="meetingsList">
+				{foreach $comment_list as $value}
+				<li>
+					<div class="user-order-hd">
+						<span class="user-order-num">参与话题：{$value['topic_title']}</span>
+						<span class="user-order-time">发起时间：{$value['create_time']|date="Y-m-d H:i:s",###}</span>
+						{if !$value['reply_content']}
+						<a class="detail-btn btn-plat btn-sm reply-btn" href="javascript:void(0)">回复</a>
+						{/if}
+					</div>
+					<div class="user-order-bd">
+						<div class="user-order-content">
+							<div class="user-order-inner">
+								<a class="tutor-avatar">
+									<img src="__STATIC_PATH__/{$value['user_img']}">
+								</a>
+								<div class="user-order-info">
+									<p>{$value['user_nickname']}</p>
+									<p>
+										{$value['comment_content']}
+									</p>
+									{if $value['reply_content']}
+									<p class="reply">行家回复：{$value['reply_content']}</p>
+									{/if}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="meeting-descriptions comment_content reply_content">
+						<div class="meeting-description">
+							<h3>回复：</h3>
+							<textarea rows="3" style="width:100%;" maxlength="500"></textarea>
+							<span class="form_error"></span>
+							<div class="comment-btn">                                    
+								<a href="javascript: void(0);" data-comment_id="{$value['comment_id']}" class="btn-primary btn-md">回复</a>
+							</div>
+						</div>
+					</div>
+				</li>
+				{/foreach}
+			</ul>
+			{/if}
+		</div>
+	</div>
+</div>
+<script>
+	var reply_ajax_url = "{:url('user/addReply')}";
+	var comment_ajax_url = "{:url('user/commentList')}";
+</script>
+<script src="__STATIC_PATH__/index/user/js/index.js"></script>
+{include file="common/footer"}

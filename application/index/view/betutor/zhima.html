@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+  	<script src="http://cdn.staticfile.org/jquery/1.8.3/jquery.min.js"></script>
+</head>
+<body>
+	真实姓名：<label for="">{$user_verify['realname']}</label><br>
+	身份证号：<label for="">{$user_verify['ID']}</label><br>
+	输入手机号：<input type="text" name="user_phone">
+	<button onclick="sendCap()">发送手机验证码</button><br>
+	<p></p>
+	输入手机验证码：<input type="text" name="code"><br>
+	<p></p>
+	<button onclick="verify()">认证</button>
+</body>
+</html>
+<script>
+	var editMobile_ajax_url = "{:url('editMobile')}";
+	var sendMobileCap_ajax_url = "{:url('sendMobileCap')}";
+	/*var to_url = */
+	function sendCap(){
+		var user_phone = $("input[name='user_phone']").val();
+
+		$('p').each(function(){
+  			$(this).text('');
+  		})
+  	
+  		if(user_phone.length == 0){
+  			$('p').eq(0).text('请填写手机号！');
+  			return;
+  		}
+
+  		$.post(sendMobileCap_ajax_url,{user_phone},function (rtnData) {
+  			
+		})
+
+	}
+	function verify(){
+		var user_phone = $("input[name='user_phone']").val();
+		var code = $("input[name='code']").val();
+
+		$('p').each(function(){
+  			$(this).text('');
+  		})
+  		if(user_phone.length == 0){
+  			$('p').eq(0).text('请填写手机号！');
+  			return;
+  		}
+  		if(code.length == 0){
+  			$('p').eq(1).text('请填写验证码！');
+  			return;
+  		}
+
+  		$.post(editMobile_ajax_url,{user_phone,code},function (rtnData) {
+  			if(rtnData.code){
+		      $('p').eq(1).text(rtnData.code);
+		    }else{
+				location.href = "{:url('material')}";
+			}
+		})
+
+	}
+</script>

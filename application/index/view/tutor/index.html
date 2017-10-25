@@ -1,0 +1,253 @@
+{include file="common/header"}
+<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script> -->
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/tutor/css/tutor.css">
+<div class="tutor">
+	<div class="nav">
+		<div class="nav-cover"></div>
+	</div>
+	<div class="container head">
+		<div class="head-img">
+			<img src="__STATIC_PATH__/{$tutor_info['tutor_img']}" class="img-thumbnail" alt="">
+		</div>
+	</div>
+	<div class="tutor-info">
+		<div class="tutor-details">
+			<div class="basic">
+				<h2 class="name">{$tutor_info['tutor_name']}</h2>
+				<p class="identity">{$tutor_info['tutor_identity']}</p>
+				<ul class="data">
+					<li><i class="icon icon-clock"></i><span>3天</span>内回应</li><li><i class="icon icon-meet"></i><span>{$tutor_info['total_meet']}人</span>见过</li><li><i class=" icon icon-heart"></i><span>{$tutor_info['total_wish']}人</span>想见</li><li><span>高</span>接收率</li><li><i class="icon-go tutor-foldingBtn"></i></li>
+				</ul>
+				<p class="address"><b>{$tutor_info['city_name']}</b><span>{$tutor_info['location']}</span></p>
+			</div>
+			{foreach $topic_list as $value}
+			<div class="topics">
+				<div class="number">
+					<div class="price">
+						￥<b>{$value['price']}</b>/次
+					</div>
+					<div class="score">
+						<b>{$value['avg_score']}</b>分
+					</div>
+				</div>
+				<div class="title">
+					{$value['topic_title']}
+				</div>
+				<div class="content little-content">
+					<p>{$value['topic_content']}</p>
+					<div class="share">
+						<b>分享话题：</b><i class="icon-wb"></i><i class="icon-wx"></i>
+					</div>
+				</div>
+				<div class="shadow">
+				</div>
+				<div class="line">
+				</div>
+				<div class="meet-data">
+					<span>约{$value['duration']}小时</span><span> {$value['meet_number']}人约过</span><i class="icon-arrow-bottom tutor-icon-arrow"></i>
+				</div>
+			</div>
+			{/foreach}
+			<div class="tutor-zh-info">
+				<h3 class="title">
+					关于在行
+				</h3>
+				<div class="big-Img">
+					<img src="__STATIC_PATH__/index/tutor/img/tutor-bigImg.jpg" alt="">
+				</div>
+				<div class="content">
+					<p>{$tutor_info['tutor_lead']}</p>
+				</div>
+			</div>
+		</div>
+		<div class="other">
+			<div class="share">
+				分享<i class="icon-wb"></i><i class="icon-wx"></i>
+			</div>
+			<div class="about-zaih">
+				<h4 class="title">只需付<span>几百元</span>，就可以与行家<br><br>
+				<span>一对一线下面谈</span></h4>
+				<p>为您答疑解惑、出谋划策。不满意还能“无忧退款”。</p>
+				<div class="logo">
+					<i class="icon-zaih-logo"></i>
+				</div>
+			</div>
+			<div class="operation-list">
+				<a href="javascript:void(0);" data-user_id="{$Think.session.info.user_id}" class="order">立即预约</a>
+				<a href="javascript:void(0);" class="wish wish-btn" data-wish="{$wish['wish_id']}" data-tutor_id="{$tutor_info['tutor_id']}"><i class="icon-heart icon-heart-empty"></i>
+					<span>加入心愿单</span></a>
+			</div>
+			<div class="tutor-related">
+				<h5 class="title">
+					相关行家
+				</h5>
+				<ul>
+					<li class="retutor-info">
+						<a href="##">
+							<div class="head-small-img">
+								<img src="__STATIC_PATH__/index/tutor/img/head-img.jpg" alt="">
+							</div>
+							<div class="basic-info">
+								<p class="tutor-title">
+									<span class="tutor-name">黄佳</span>
+									<em>拥有11年教学经验资深教练</em>
+								</p>
+								<p class="topic-title">产后身材走形怎么破？</p>
+								<p class="meet-count">6人见过</p>
+							</div>
+						</a>
+					</li>
+					<li class="retutor-info">
+						<a href="##">
+							<div class="head-small-img">
+								<img src="__STATIC_PATH__/index/tutor/img/head-img.jpg" alt="">
+							</div>
+							<div class="basic-info">
+								<p class="tutor-title">
+									<span class="tutor-name">黄佳</span>
+									<em>拥有11年教学经验资深教练</em>
+								</p>
+								<p class="topic-title">产后身材走形怎么破？</p>
+
+								<p class="meet-count">6人见过</p>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="tutor-comment-box">
+		<div class="tutor-comment">
+			<div class="title-cate">
+				<div class="title">学员点评</div>
+			    <div class="order">
+			    	<div class="top">热门<i class="icon-arrow-bottom"></i></div>
+			    	<div class="all">
+			    		<ul>
+			    			<li><a>热门</a></li>
+			    			<li><a>最新</a></li>
+			    		</ul>
+			    	</div>
+			    </div>
+			</div>
+			<div class="comment-details">
+				<ul>
+					{foreach $comment_list as $value}
+					<li>
+						<div class="head-small-img">
+							<img src="__STATIC_PATH__/{$value['user_img']}" alt="">
+						</div>
+						<div class="basic-info">
+							<h5 class="tutor-name">{$value['user_nickname']}</h5>
+							<p class="comment-content">{$value['comment_content']}</p>
+							<div class="comment-topic">
+								参与话题：{$value['topic_title']}
+							</div>
+							<div class="comment-number">
+								<span>2017-08-19</span>
+								<button type="button" class="agree-btn">{$value['agree_number']}有用</button>
+							</div>
+							{if $value['reply_content']}
+							<div class="tutor-reply">
+								<p>行家回复：{$value['reply_content']}</p>
+							</div>
+							{/if}
+						</div>
+					</li>
+					{/foreach}
+				</ul>
+				<div class="more">
+					<a>查看更多</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="overlay booking-overlay">
+	<div class="overlay-dialog" tabindex="-1">									
+		<div class="overlay-content">
+			<div class="step">
+				<span class="step-complete">预约<em>1</em><i class="step-line"></i></span>
+				<span>行家确认<em>2</em><i class="step-line"></i></span>
+				<span>付款<em>3</em><i class="step-line"></i></span>                            
+				<span>完成<em>4</em><i class="step-line"></i></span>                            
+				<span>评价<em>5</em><i class="step-line"></i></span>
+			</div>
+			<div class="bookingFormWrap">                                
+				<div class="booking-form ">
+					<p class="booking-form-title" id="showPrice">预约</p>                    
+					<div class="booking-options" id="bookingTopics">
+						{foreach $topic_list as $value}
+						<div class="booking-option-item item">
+							<a href="javascript: void 0;" class="btn-hg" data-topic_id="{$value['topic_id']}" data-topic_price="499" data-topic_type="general" data-is_fixture="false" data-fixture="" data-selected="true">
+								<span class="title">{$value['topic_title']}</span>
+								<span class="price">{$value['price']}元/次<br>{$value['duration']}小时左右</span>
+							</a>
+						</div>
+						{/foreach}
+					</div>                                    
+					<div class="" id="bookingTimePlaceWrap">     
+						<p class="booking-form-title">时间地点选择</p>     
+						<div class="booking-options" id="bookingTimePlace">   
+							<a href="javascript: void 0;" class="btn-hg btn-option bookingTimePlaceOption" data-selected="true">见面时间、地点，将在行家同意见面后与您商定</a>  
+						</div>                                    
+					</div>                                
+				</div>                                
+				<div class="overlay-buttons-right ">                                    
+					<a href="javascript: void 0;" class="btn-primary btn-md bookingNextStep">下一步</a>
+				</div>                            
+			</div>                            
+			<div class="bookingFormWrap hidden">                                
+				<form class="booking-form">
+					<div class="form-group">                                    
+						<label class="form-group-title booking-form-title" for="question">告诉行家你要请教的问题：（20-300字）</label>
+						<textarea class="booking-question" id="question" name="question" maxlength="300" placeholder="例如：回国半年，准备创业，想做一个健身O2O项目；之前在美国做律师，转变，想快速了解和适应国内的创业环境，向行家请教初始团队组建和运营的经验，以及帮忙分析产品模式。"></textarea>
+						<p class="form-error ques"></p>                                
+					</div>                                
+					<div class="form-group">                                    
+						<label class="form-group-title booking-form-title" for="description">介绍自己当前的情况：（20-300字）</label>
+						<textarea class="booking-description" id="description" name="description" maxlength="300" placeholder="例如：我目前在一家科技媒体做运营，工作3年，传媒大学毕业，业余运营一个微信公众号，平时喜欢写文章，希望职业上有更好突破。"></textarea>
+						<p class="form-error desc"></p>                                
+					</div>
+				</form>                                
+				<div class="overlay-buttons-right">                                    
+					<a href="javascript: void 0;" class="btn-primary btn-md" data-action="overlay-confirm" data-analyze="Meet:Launch:84762566:85198836" onclick="booking({$tutor_info['tutor_id']})">提交</a>
+				</div>                            
+			</div>
+		</div>								
+	</div>								
+	<div class="overlay-close" data-action="overlay-close">
+		<span class="icon icon-close-thin"></span>								
+	</div>							
+</div>
+ 
+
+<div class="overlay booking-complete" style="top: 822.5px; left: 358.5px;">
+	<div class="overlay-dialog" tabindex="-1">									
+		<div class="overlay-content">
+			<h3>提交成功！</h3>                                                    
+			<p>请等候行家的反馈</p>                                                    
+			<div class="overlay-buttons">                                                       
+				<a href="{:url('user/index')}" class="btn-primary btn-md">查看进展</a>
+				<a href="javascript: void 0;" class="btn-default btn-md overlay-cancel" data-action="overlay-close">取消</a>
+			</div>
+		</div>								
+	</div>								
+	<div class="overlay-close" data-action="overlay-close">									
+		<span class="icon icon-close-thin"></span>								
+	</div>							
+</div>
+<div class="overlay-cover"></div>
+
+<script>
+	var wish_ajax_url = "{:url('user/addWish')}";
+	var booking_ajax_url = "{:url('user/booking')}";
+	var login_url = "{:url('user/signIn')}";
+</script>
+<script src="__STATIC_PATH__/index/tutor/js/tutor.js"></script>
+{include file="common/footer"}
+
+

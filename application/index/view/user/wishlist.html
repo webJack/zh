@@ -1,0 +1,116 @@
+
+{include file="common/header"}
+<link rel="stylesheet" type="text/css" href="__STATIC_PATH__/index/user/css/index.css">
+<div class="personal_content">
+	<div class="self-container">
+		<div class="personal_left">
+			<div class="user_head_pic">
+				<img src="__STATIC_PATH__/{$user_info['user_img']}">
+			</div>
+			<ul class="setting_list">
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('index')}">
+						<em class="active_icon"></em>
+						我约的行家
+					</a>
+				</li>
+				<li class="setting_menu active">
+					<a class="setting_item" href="{:url('wishlist')}">
+						<em class="active_icon"></em>
+						心愿单
+					</a>
+				</li>
+				{if $Think.session.tutor_info}
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('topicList')}">
+						<em class="active_icon"></em>
+						我的话题
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('bookingList')}">
+						<em class="active_icon"></em>
+						预约单
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item" href="{:url('commentList')}">
+						<em class="active_icon"></em>
+						收到的评论
+					</a>
+				</li>
+				{/if}
+				<li class="setting_menu">	
+					<a class="setting_item" href="{:url('coupon')}">
+						<em class="active_icon"></em>
+						我的礼券
+					</a>
+				</li>
+				<li class="setting_menu">
+					<a class="setting_item">
+						<em class="active_icon"></em>
+						个人设置
+						<span class="list_icon_box">
+							<i class="drop_icon"></i>
+						</span>
+					</a>
+					<ul class="setting_user_list">
+						<li><a href="{:url('profile')}">个人资料</a></li>
+						<li><a href="{:url('avatar')}">头像设置</a></li>
+						<li><a href="{:url('mobile')}">验证手机</a></li>
+						<li><a href="{:url('password')}">设置密码</a></li>
+						<li><a href="{:url('receipt_accounts')}">收款及隐私</a></li>
+					</ul>
+				</li>
+			</ul>  
+		</div>
+		<div class="personal_right">
+			{if $wish_list->isEmpty()}
+			<div class="personal_info">
+				<div class="user_content">
+					<div class="expert_content">
+						<p class="none">
+							╮(╯﹏╰）╭真忧伤，我的心愿单还没有行家唉。
+							<a href="">立即去加入！</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			{else/}
+			<ul id="wishList" class="wish-list">
+				{foreach $wish_list as $key => $value}
+				<li class="wish-item">
+					<a class="tutor-link" href="{:url('tutor/index',['tutor_id' => $value['tutor_id']])}">
+						<span class="tutor-avatar">
+							<img src="__STATIC_PATH__/{$value['tutor_img']}">
+						</span>
+						<div class="tutor-info">
+							<h3>
+								<span class="user-name">{$value['tutor_name']}</span>
+								<span class="tutor-title">
+									{$value['tutor_identity']}
+								</span>
+							</h3>
+							{foreach $topic_list[$key] as $val}
+							<p>
+							    <span class="topic-name">{$val['topic_title']}</span>
+								<span class="topic-price">{$val['price']}元/次</span>
+							</p>
+							{/foreach}
+						</div>
+						<button class="delete-btn btn-plat btn-sm" data-tutor_id="{$value['tutor_id']}">删除</button>
+					</a>
+				</li>
+				{/foreach}
+			</ul>
+			{$wish_list->render()}
+			{/if}
+		</div>
+	</div>
+</div>
+<script>
+	var deleteWish_ajax_url = "{:url('user/deleteWish')}";
+	var to_url = "{:url('wishlist')}";
+</script>
+<script src="__STATIC_PATH__/index/user/js/index.js"></script>
+{include file="common/footer"}

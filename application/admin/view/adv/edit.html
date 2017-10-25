@@ -1,0 +1,42 @@
+{include file="public/header"} 
+
+<div class="self-container mt-3">
+    <h3>广告编辑页</h3>
+     <form action="{:url('update')}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label >广告图</label>
+            <input type="file" name="adv_img">
+        </div>
+        <div class="form-group">
+            <label >广告大图</label>
+            <input type="file" name="adv_bigimg">
+        </div>
+        <div class="form-group">
+            <label >分类</label>
+            <select name="cate_id" id="" class="form-control">
+                <option value="">请选择</option>
+                {foreach $cate_list as $value}
+                    <option disabled value="{$value['cate_id']}">{$value['cate_name']}</option>
+                    <!-- <?php if (isset($value['child_menu'])){ ?> -->
+                    {foreach $value['child_menu'] as $value2nd}
+                        <option disabled value="{$value2nd['cate_id']}">&nbsp;&nbsp;&nbsp;{$value2nd['cate_name']}</option>
+                        <!-- <?php if (isset($value2nd['child_menu'])){ ?> -->
+                        {foreach $value2nd['child_menu'] as $value3th}
+                        <option value="{$value3th['cate_id']}" {if $adv_info['cate_id']==$value3th['cate_id']} selected {/if}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$value3th['cate_name']}</option>
+                        {/foreach}
+                        <!-- <?php } ?> -->
+                    {/foreach}
+                    <!-- <?php } ?> -->
+                {/foreach}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="hidden" name="img" value="{$adv_info['adv_img']}">
+            <input type="hidden" name="bigimg" value="{$adv_info['adv_bigimg']}">
+            <input type="hidden" name="adv_id" value="{$adv_info.adv_id}">
+            <input type="submit" class="btn btn-info" value="保存">
+        </div>
+     </form>
+</div>
+
+{include file="public/footer"}

@@ -1,0 +1,30 @@
+{include file="public/header"} 
+
+<div class="self-container mt-3">
+    <h3>分类添加页</h3>
+     <form action="{:url('save')}" method="post">
+        <div class="form-group">
+            <label >分类名</label>
+            <input type="text" class="form-control" name="cate_name">
+        </div>
+        <div class="form-group">
+            <label >上级分类</label>
+            <select name="parent_level" id="" class="form-control">
+                <option value="0_0">请选择</option>
+                {foreach $cate_list as $value}
+                <option value="{$value['cate_id']}_{$value['level']}">{$value['cate_name']}</option>
+                <!-- <?php if (isset($value['child_menu'])){ ?> -->
+                <!-- {foreach $value['child_menu'] as $value2nd} -->
+                    <option  value="{$value2nd['cate_id']}_{$value2nd['level']}">&nbsp;&nbsp;&nbsp;&nbsp;{$value2nd['cate_name']}</option>
+                <!-- {/foreach} -->
+                <!-- <?php } ?> -->
+                {/foreach}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-info" value="添加">
+        </div>
+     </form>
+</div>
+
+{include file="public/footer"}
